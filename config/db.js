@@ -1,16 +1,23 @@
-import { MongoClient } from "mongodb";
-import dontenv from "dotenv";
+// config/db.js
+import mongoose from "mongoose";
 
-dontenv.config();
+let isConnected = false;
 
-// Create a new MongoClient
-const client = new MongoClient(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+export const connectDB = async () => {
+  if (isConnected) {
+    console.log("✅ Using existing MongoDB connection");
+    return;
+  }
 
-const conn = await client.connect();
-conn.once("open", () => {
-  console.log("MongoDB database connection established successfully");
-});
-export default conn;
+  try {
+    const conn = await mongoose.connect(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    isConnected = true;
+    console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
+  } catch (error) {
+    console.error("❌ MongoDB connection error:", error.message);
+    throw error;
+  }
+};

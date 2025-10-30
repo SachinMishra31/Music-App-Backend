@@ -1,8 +1,9 @@
+// server.js
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import path from "path";
-import mongoose from "mongoose";
+import { connectDB } from "./config/db.js"; // ✅ import updated db.js
 
 // Importing routes
 import authRoutes from "./routes/authRoutes.js";
@@ -23,11 +24,8 @@ app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
-// MongoDB Connection
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log("✅ MongoDB connected successfully"))
-  .catch((err) => console.error("❌ MongoDB connection error:", err.message));
+// ✅ Connect MongoDB (optimized for Vercel)
+connectDB();
 
 // Static files (optional)
 const publicPath = path.join(path.resolve(), "public");
@@ -43,10 +41,10 @@ app.use("/api/v1/jamendo", jamendoRoutes);
 app.get("/api/v1/stream/:filename", streamSong);
 app.get("/api/v1/songs", getSongs);
 
-// Root test route
+// Root route
 app.get("/", (req, res) => {
   res.send("🎵 Music Stream Backend Running Successfully on Vercel!");
 });
 
-// ✅ Export the app (IMPORTANT for Vercel)
+// ✅ Export app for Vercel
 export default app;
