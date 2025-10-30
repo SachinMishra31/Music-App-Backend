@@ -1,0 +1,73 @@
+# ------------------------
+# Node & npm dependencies
+# ------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ------------------------
+# Build / Dist folders
+# ------------------------
+dist/
+build/
+.cache/
+.next/
+out/
+
+# ------------------------
+# Environment variables
+# ------------------------
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# ------------------------
+# Logs and temp files
+# ------------------------
+*.log
+logs/
+tmp/
+temp/
+debug.log
+*.pid
+*.seed
+*.pid.lock
+
+# ------------------------
+# IDE and Editor files
+# ------------------------
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# ------------------------
+# OS generated files
+# ------------------------
+.DS_Store
+Thumbs.db
+
+# ------------------------
+# Coverage / testing
+# ------------------------
+coverage/
+.nyc_output/
+
+# ------------------------
+# Local database or uploads (if any)
+# ------------------------
+/uploads
+/data/db
+/public/temp
+
+# ------------------------
+# Misc
+# ------------------------
+*.bak
+*.swp
+*.zip
+*.tar
+*.gz
